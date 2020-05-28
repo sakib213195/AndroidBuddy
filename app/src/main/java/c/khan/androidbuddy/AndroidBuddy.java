@@ -18,7 +18,8 @@ public class AndroidBuddy extends AppCompatActivity {
             BodyPartFragment headFrag = new BodyPartFragment();
 
             headFrag.setmImageIds(ImageAssets.getHeads());
-            headFrag.setListIndex(1);
+            int headIndex = getIntent().getIntExtra("headIndex", 0);
+            headFrag.setListIndex(headIndex);
 
             fragManager.beginTransaction()
                     .add(R.id.head_container, headFrag)
@@ -28,7 +29,8 @@ public class AndroidBuddy extends AppCompatActivity {
             BodyPartFragment bodyfrag = new BodyPartFragment();
 
             bodyfrag.setmImageIds(ImageAssets.getBodies());
-            bodyfrag.setListIndex(1);
+            int bodyIndex = getIntent().getIntExtra("headIndex", 0);
+            bodyfrag.setListIndex(bodyIndex);
 
             fragManager.beginTransaction()
                     .add(R.id.body_container, bodyfrag)
@@ -38,7 +40,8 @@ public class AndroidBuddy extends AppCompatActivity {
             BodyPartFragment legfrag = new BodyPartFragment();
 
             legfrag.setmImageIds(ImageAssets.getLegs());
-            legfrag.setListIndex(1);
+            int legIndex = getIntent().getIntExtra("legIndex", 0);
+            legfrag.setListIndex(legIndex);
 
             fragManager.beginTransaction()
                     .add(R.id.leg_container, legfrag)
