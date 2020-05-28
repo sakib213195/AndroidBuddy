@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +17,10 @@ import java.util.List;
  */
 
 public class BodyPartFragment extends Fragment {
+
+    public static final String IMAGE_LIST = "img_ID";
+    public static final String IMAGE_INDEX = "img_index";
+
 
     private static final String TAG = "BodyPartFragment";
 
@@ -29,21 +34,41 @@ public class BodyPartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
+        if (savedInstanceState != null){
+            mImageIds = savedInstanceState.getIntegerArrayList(IMAGE_LIST);
+            mListIndex = savedInstanceState.getInt(IMAGE_INDEX);
+        }
+
         View rootView = inflater.inflate(R.layout.bodypart, container, false);
 
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.bodypart_imageview);
+        final ImageView imageView = (ImageView) rootView.findViewById(R.id.bodypart_imageview);
 
         //imageView.setImageResource(ImageAssets.getHeads().get(0));
 
         if (mImageIds != null){
             imageView.setImageResource(mImageIds.get(mListIndex));
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (mListIndex < mImageIds.size()-1){
+                        mListIndex++;
+                    } else {
+                        mListIndex = 0;
+                    }
+
+                    imageView.setImageResource(mImageIds.get(mListIndex));
+                }
+            }
+
+            );
+
         }
 
         else {
             Log.v(TAG, "Error: No image ID");
         }
-
-
 
         return rootView;
 
@@ -55,6 +80,12 @@ public class BodyPartFragment extends Fragment {
 
     public void setListIndex (int index){
         mListIndex = index;
+    }
+
+    @Override
+    public void onSaveInstanceState (Bundle currentState){
+        currentState.putIntegerArrayList(IMAGE_LIST, (ArrayList<Integer>)mImageIds);
+        currentState.putInt(IMAGE_INDEX, mListIndex);
     }
 
 }

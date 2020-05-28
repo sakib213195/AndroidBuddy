@@ -11,38 +11,39 @@ public class AndroidBuddy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_buddy);
 
-        FragmentManager fragManager = getSupportFragmentManager();
+        if (savedInstanceState == null) {
 
-        BodyPartFragment headFrag = new BodyPartFragment();
+            FragmentManager fragManager = getSupportFragmentManager();
 
-        headFrag.setmImageIds(ImageAssets.getHeads());
-        headFrag.setListIndex(1);
+            BodyPartFragment headFrag = new BodyPartFragment();
 
-        fragManager.beginTransaction()
-                .add(R.id.head_container, headFrag)
-                .commit();
+            headFrag.setmImageIds(ImageAssets.getHeads());
+            headFrag.setListIndex(1);
 
-
-
-        BodyPartFragment bodyfrag = new BodyPartFragment();
-
-        bodyfrag.setmImageIds(ImageAssets.getBodies());
-        bodyfrag.setListIndex(1);
-
-        fragManager.beginTransaction()
-                .add(R.id.body_container, bodyfrag)
-                .commit();
+            fragManager.beginTransaction()
+                    .add(R.id.head_container, headFrag)
+                    .commit();
 
 
+            BodyPartFragment bodyfrag = new BodyPartFragment();
 
-        BodyPartFragment legfrag = new BodyPartFragment();
+            bodyfrag.setmImageIds(ImageAssets.getBodies());
+            bodyfrag.setListIndex(1);
 
-        legfrag.setmImageIds(ImageAssets.getLegs());
-        legfrag.setListIndex(1);
+            fragManager.beginTransaction()
+                    .add(R.id.body_container, bodyfrag)
+                    .commit();
 
-        fragManager.beginTransaction()
-                .add(R.id.leg_container, legfrag)
-                .commit();
 
+            BodyPartFragment legfrag = new BodyPartFragment();
+
+            legfrag.setmImageIds(ImageAssets.getLegs());
+            legfrag.setListIndex(1);
+
+            fragManager.beginTransaction()
+                    .add(R.id.leg_container, legfrag)
+                    .commit();
+
+        }
     }
 }
